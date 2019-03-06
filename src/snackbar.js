@@ -102,3 +102,7 @@ export const withSnackbar = (YourComponent) => {
     );
   };
 };
+
+export const useSnackbar = () => {
+  return React.useContext(SnackbarContext);
+};

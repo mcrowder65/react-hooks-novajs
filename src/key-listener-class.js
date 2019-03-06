@@ -1,22 +1,28 @@
 import React from "react";
 
-class KeyListenerClass extends React.Component {
-  state = {
-    currentKey: "",
+function KeyListenerClass() {
+  const [currentKey, setCurrentKey] = React.useState("");
+  const handleKey = ({ key }) => {
+    setCurrentKey(key);
   };
-  handleKey = ({ key }) => {
-    this.setState({ currentKey: key });
-  };
-  componentWillUnmount() {
-    window.removeEventListener("keydown", this.handleKey);
-  }
-  componentDidMount() {
-    window.addEventListener("keydown", this.handleKey);
-  }
-  render() {
-    return <div>Current key:{this.state.currentKey}</div>;
-  }
+
+  React.useEffect(() => {
+    // componentDidMount
+    // componentDidUpdate
+    window.addEventListener("keydown", handleKey);
+    return () => {
+      // componentWillUnmount
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, []);
+  return <div>Current key:{currentKey}</div>;
 }
+// componentWillUnmount() {
+//
+// }
+// componentDidMount() {
+//
+// }
 
 function ParentComponent() {
   const [isMounted, setIsMounted] = React.useState(false);

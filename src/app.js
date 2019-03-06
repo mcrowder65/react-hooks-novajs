@@ -17,6 +17,7 @@ import KeyListenerHook from "./key-listener-hook";
 import UseCallback from "./use-callback";
 import UseMemo from "./use-memo";
 import BasicHook from "./basic-hook";
+import TwoHooks from "./two-hooks";
 
 const browserHistory = createBrowserHistory();
 
@@ -40,6 +41,7 @@ class App extends Component {
               <Route path="/use-callback" component={UseCallback} />
               <Route path="/use-memo" component={UseMemo} />
               <Route path="/basic-hook" component={BasicHook} />
+              <Route path="/two-hooks" component={TwoHooks} />
             </div>
           </BrowserRouter>
         </LoadingProvider>

@@ -2,49 +2,57 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import { sleep } from "./utils";
 import { WithGlobalLoader, WithLocalLoader } from "./loading";
+import { WithSnackbar } from "./snackbar";
 
 function TwoHoc() {
   return (
-    <WithGlobalLoader>
-      {(global) => {
-        const globalClick = () => {
-          global.makeApiCall(async () => {
-            await sleep(3000);
-          });
-        };
+    <WithSnackbar>
+      {({ addMessage }) => {
         return (
-          <>
-            <Button
-              color="primary"
-              variant="contained"
-              onClick={globalClick}
-              disabled={global.isLoading}
-            >
-              Global button
-            </Button>
-            <WithLocalLoader>
-              {(local) => {
-                const localClick = () => {
-                  local.makeApiCall(async () => {
-                    await sleep(1000);
-                  });
-                };
-                return (
+          <WithGlobalLoader>
+            {(global) => {
+              const globalClick = () => {
+                global.makeApiCall(async () => {
+                  await sleep(3000);
+                  addMessage("global");
+                });
+              };
+              return (
+                <>
                   <Button
-                    color="secondary"
+                    color="primary"
                     variant="contained"
-                    onClick={localClick}
-                    disabled={local.isLoading}
+                    onClick={globalClick}
+                    disabled={global.isLoading}
                   >
-                    Local button
+                    Global button
                   </Button>
-                );
-              }}
-            </WithLocalLoader>
-          </>
+                  <WithLocalLoader>
+                    {(local) => {
+                      const localClick = () => {
+                        local.makeApiCall(async () => {
+                          await sleep(1000);
+                        });
+                      };
+                      return (
+                        <Button
+                          color="secondary"
+                          variant="contained"
+                          onClick={localClick}
+                          disabled={local.isLoading}
+                        >
+                          Local button
+                        </Button>
+                      );
+                    }}
+                  </WithLocalLoader>
+                </>
+              );
+            }}
+          </WithGlobalLoader>
         );
       }}
-    </WithGlobalLoader>
+    </WithSnackbar>
   );
 }
 

@@ -1,10 +1,8 @@
-// const object = { hello: "hello", message: "pickles" };
-//
+const object = { hello: "hello", message: "pickles" };
+
 // const { hello, message } = object;
-//
 
 const array = ["hello", "pickles"];
 
-const [hello, message] = array;
-
-console.log(hello, " ", message);
+const [a, b] = array;
+console.log(a, " ", b);
