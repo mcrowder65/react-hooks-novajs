@@ -3,3 +3,8 @@ export const sleep = (time) => {
     setTimeout(resolve, time);
   });
 };
+
+export const apiCall = async () => {
+  await sleep(2000);
+  return "I am the response";
+};

@@ -9,7 +9,13 @@ import LoadingProvider from "./loading";
 import TwoHoc from "./two-hoc";
 import TwoRenderProps from "./two-renderprops";
 import TwoHooks from "./two-hooks";
+import UseReducer from "./use-reducer";
+import NeedUseReducer from "./need-use-reducer";
+import UseEffectClass from "./use-effect-class";
+import UseEffect from "./use-effect";
+
 const browserHistory = createBrowserHistory();
+
 class App extends Component {
   render() {
     return (
@@ -22,6 +28,10 @@ class App extends Component {
               <Route path="/two-hoc" component={TwoHoc} />
               <Route path="/two-renderprops" component={TwoRenderProps} />
               <Route path="/two-hooks" component={TwoHooks} />
+              <Route path="/need-use-reducer" component={NeedUseReducer} />
+              <Route path="/use-reducer" component={UseReducer} />
+              <Route path="/use-effect-class" component={UseEffectClass} />
+              <Route path="/use-effect" component={UseEffect} />
             </div>
           </BrowserRouter>
         </LoadingProvider>
