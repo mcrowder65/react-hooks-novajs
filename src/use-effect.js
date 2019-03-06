@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import isEqual from "lodash.isequal";
 
-class UseEffectClass extends React.Component {
+class UseEffect extends React.Component {
   static propTypes = {
     list: PropTypes.array.isRequired,
     selectedIndex: PropTypes.number.isRequired,
@@ -50,7 +50,7 @@ function ParentComponent() {
       <button onClick={setListOne}>Render List One</button>
 
       <button onClick={setListTwo}>Render List Two</button>
-      <UseEffectClass
+      <UseEffect
         list={list}
         setIndex={(i) => setIndex(i)}
         selectedIndex={index}

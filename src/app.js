@@ -11,6 +11,7 @@ import TwoRenderProps from "./two-renderprops";
 import UseReducer from "./use-reducer";
 import NeedUseReducer from "./need-use-reducer";
 import UseEffectClass from "./use-effect-class";
+import UseEffect from "./use-effect";
 
 const browserHistory = createBrowserHistory();
 
@@ -28,6 +29,7 @@ class App extends Component {
               <Route path="/need-use-reducer" component={NeedUseReducer} />
               <Route path="/use-reducer" component={UseReducer} />
               <Route path="/use-effect-class" component={UseEffectClass} />
+              <Route path="/use-effect" component={UseEffect} />
             </div>
           </BrowserRouter>
         </LoadingProvider>
