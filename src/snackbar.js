@@ -77,6 +77,9 @@ SnackbarProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+export const useSnackbar = () => {
+  return React.useContext(SnackbarContext);
+};
 export const WithSnackbar = (props) => {
   return (
     <SnackbarContext.Consumer>

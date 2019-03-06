@@ -9,7 +9,7 @@ function OneHoc(props) {
       variant="contained"
       color="primary"
       onClick={() => {
-        props.addMessage("I am a snackbar!");
+        props.addMessage("Hello world!");
       }}
     >
       Add Snackbar
@@ -20,4 +20,5 @@ function OneHoc(props) {
 OneHoc.propTypes = {
   addMessage: PropTypes.func.isRequired,
 };
+
 export default withSnackbar(OneHoc);

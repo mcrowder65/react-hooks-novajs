@@ -4,17 +4,20 @@ import compose from "lodash.compose";
 import { Button } from "@material-ui/core";
 import { sleep } from "./utils";
 import { withGlobalLoader, withLocalLoader } from "./loading";
+import { withSnackbar } from "./snackbar";
 
 function TwoHoc(props) {
   const globalClick = () => {
     props.makeApiCall(async () => {
       await sleep(3000);
+      props.addMessage("Global done");
     });
   };
 
   const localClick = () => {
     props.makeApiCall(async () => {
       await sleep(1000);
+      props.addMessage("local done");
     });
   };
   return (
@@ -42,10 +45,12 @@ function TwoHoc(props) {
 TwoHoc.propTypes = {
   makeApiCall: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  addMessage: PropTypes.func.isRequired,
 };
 const enhance = compose(
   withLocalLoader,
   withGlobalLoader,
+  withSnackbar,
 );
 
 export default enhance(TwoHoc);
