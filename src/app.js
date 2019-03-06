@@ -14,6 +14,8 @@ import UseEffectClass from "./use-effect-class";
 import UseEffect from "./use-effect";
 import KeyListenerClass from "./key-listener-class";
 import KeyListenerHook from "./key-listener-hook";
+import UseCallback from "./use-callback";
+
 const browserHistory = createBrowserHistory();
 
 class App extends Component {
@@ -33,6 +35,7 @@ class App extends Component {
               <Route path="/use-effect" component={UseEffect} />
               <Route path="/key-listener-class" component={KeyListenerClass} />
               <Route path="/key-listener-hook" component={KeyListenerHook} />
+              <Route path="/use-callback" component={UseCallback} />
             </div>
           </BrowserRouter>
         </LoadingProvider>
