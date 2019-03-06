@@ -2,27 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 const LoadingContext = React.createContext();
 
-class ReusableComponent extends React.Component {
-  static propTypes = {
-    children: PropTypes.func.isRequired,
-  };
-  state = {
-    loadCount: 0,
-  };
-  makeApiCall = async (yourApiCall) => {
+function ReusableComponent({ children }) {
+  const [loadCount, setLoadCount] = React.useState(0);
+  const makeApiCall = async (yourApiCall) => {
     try {
-      this.setState((state) => ({ loadCount: state.loadCount + 1 }));
+      setLoadCount((state) => state + 1);
       await yourApiCall();
     } finally {
-      this.setState((state) => ({ loadCount: state.loadCount - 1 }));
+      setLoadCount((state) => state - 1);
     }
   };
-  render() {
-    return this.props.children({
-      makeApiCall: this.makeApiCall,
-      isLoading: this.state.loadCount > 0,
-    });
-  }
+
+  return children({ makeApiCall, isLoading: loadCount > 0 });
 }
 class LoadingProvider extends React.Component {
   static propTypes = {
