@@ -4,6 +4,7 @@ import { Route } from "react-router";
 import { createBrowserHistory } from "history";
 import OneHoc from "./one-hoc";
 import { SnackbarProvider } from "./snackbar";
+import OneRenderProps from "./one-renderprops";
 
 const browserHistory = createBrowserHistory();
 class App extends Component {
@@ -11,7 +12,10 @@ class App extends Component {
     return (
       <SnackbarProvider>
         <BrowserRouter history={browserHistory}>
-          <Route path="/one-hoc" component={OneHoc} />
+          <div>
+            <Route exact path="/one-hoc" component={OneHoc} />
+            <Route path="/one-renderprops" component={OneRenderProps} />
+          </div>
         </BrowserRouter>
       </SnackbarProvider>
     );

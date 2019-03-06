@@ -77,18 +77,28 @@ SnackbarProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+export const WithSnackbar = (props) => {
+  return (
+    <SnackbarContext.Consumer>
+      {({ addMessage }) => {
+        return typeof props.children === "function"
+          ? props.children({ addMessage })
+          : props.children;
+      }}
+    </SnackbarContext.Consumer>
+  );
+};
+WithSnackbar.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+};
 export const withSnackbar = (YourComponent) => {
-  return class extends React.Component {
-    render() {
-      return (
-        <SnackbarContext.Consumer>
-          {(value) => {
-            return (
-              <YourComponent {...this.props} addMessage={value.addMessage} />
-            );
-          }}
-        </SnackbarContext.Consumer>
-      );
-    }
+  return function(props) {
+    return (
+      <SnackbarContext.Consumer>
+        {(value) => {
+          return <YourComponent {...props} addMessage={value.addMessage} />;
+        }}
+      </SnackbarContext.Consumer>
+    );
   };
 };
