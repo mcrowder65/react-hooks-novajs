@@ -1,39 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
-import isEqual from "lodash.isequal";
 
-class UseEffect extends React.Component {
-  static propTypes = {
-    list: PropTypes.array.isRequired,
-    selectedIndex: PropTypes.number.isRequired,
-    setIndex: PropTypes.func.isRequired,
-  };
-  componentDidUpdate(prevProps) {
-    if (!isEqual(prevProps.list, this.props.list)) {
-      this.props.setIndex(0);
-    }
-  }
-  render() {
-    const { selectedIndex, setIndex, list } = this.props;
-    return (
-      <div>
-        <select
-          value={selectedIndex}
-          onChange={(e) => setIndex(Number(e.target.value))}
-        >
-          {list.map((number, index) => {
-            return (
-              <option value={index} key={index}>
-                {number}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-    );
-  }
+function UseEffect({ selectedIndex, setIndex, list }) {
+  React.useEffect(() => {
+    setIndex(0);
+  }, [list]);
+  return (
+    <div>
+      <select
+        value={selectedIndex}
+        onChange={(e) => setIndex(Number(e.target.value))}
+      >
+        {list.map((number, index) => {
+          return (
+            <option value={index} key={index}>
+              {number}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
 }
 
+UseEffect.propTypes = {
+  list: PropTypes.array.isRequired,
+  selectedIndex: PropTypes.number.isRequired,
+  setIndex: PropTypes.func.isRequired,
+};
 function ParentComponent() {
   const [list, setList] = React.useState([111, 222]);
   const [index, setIndex] = React.useState(0);
