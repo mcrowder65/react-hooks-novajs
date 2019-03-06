@@ -1,47 +1,30 @@
 import React from "react";
-import PropTypes from "prop-types";
 import faker from "faker";
 
-function FilterNames({ list }) {
+const list = Array(100000)
+  .fill()
+  .map(() => {
+    return faker.name.findName();
+  });
+function FilterNames() {
+  const [count, setCount] = React.useState(0);
+  const filterNames = (filter) => {
+    console.log("filterRunning");
+    return filter ? list.filter((name) => name.indexOf(filter) !== -1) : list;
+  };
   const [filter, setFilter] = React.useState("");
-  const getNames = React.useCallback(() => {
-    return filter
-      ? list.filter((item) => item.name.indexOf(filter) !== -1)
-      : list;
-  }, [filter]);
-
-  const names = getNames();
-
+  const names = React.useMemo(() => filterNames(filter), [filter]);
+  // const names = filterNames(filter);
   return (
     <div>
-      Names <input value={filter} onChange={(e) => setFilter(e.target.value)} />{" "}
-      {names.map(({ name }) => (
-        <span key={name}>{name}</span>
+      <div>
+        <button onClick={() => setCount(count + 1)}>Force a rerender</button>
+      </div>
+      Names <input value={filter} onChange={(e) => setFilter(e.target.value)} />
+      {names.map((name, index) => (
+        <div key={index}>{name}</div>
       ))}
     </div>
   );
 }
-
-FilterNames.propTypes = {
-  list: PropTypes.array.isRequired,
-};
-function ParentComponent() {
-  const [mounted, setMounted] = React.useState(true);
-  const list = Array(100)
-    .fill()
-    .map(() => {
-      const name = faker.name.findName();
-      return {
-        name,
-      };
-    });
-  return (
-    <div>
-      <button onClick={() => setMounted((state) => !state)}>
-        Toggle mount
-      </button>
-      {mounted ? <FilterNames list={list} /> : null}
-    </div>
-  );
-}
-export default ParentComponent;
+export default FilterNames;
