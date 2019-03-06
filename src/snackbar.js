@@ -12,8 +12,7 @@ export class SnackbarProvider extends React.Component {
     messageInfo: {},
   };
 
-  handleClick = (message) => () => {
-    console.log("handleClick");
+  handleClick = (message) => {
     this.queue.push({
       message,
       key: new Date().getTime(),
@@ -50,9 +49,8 @@ export class SnackbarProvider extends React.Component {
 
   render() {
     const { messageInfo } = this.state;
-    console.log("messageInfo ", messageInfo);
     return (
-      <SnackbarContext.Provider value={{ addMessage: () => this.handleClick }}>
+      <SnackbarContext.Provider value={{ addMessage: this.handleClick }}>
         <Snackbar
           key={messageInfo.key}
           anchorOrigin={{
@@ -68,6 +66,7 @@ export class SnackbarProvider extends React.Component {
           }}
           message={<span id="message-id">{messageInfo.message}</span>}
         />
+
         {this.props.children}
       </SnackbarContext.Provider>
     );
@@ -84,8 +83,6 @@ export const withSnackbar = (YourComponent) => {
       return (
         <SnackbarContext.Consumer>
           {(value) => {
-            value.addMessage("hello");
-            console.log(value);
             return (
               <YourComponent {...this.props} addMessage={value.addMessage} />
             );
