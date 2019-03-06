@@ -9,6 +9,7 @@ import LoadingProvider from "./loading";
 import TwoHoc from "./two-hoc";
 import TwoRenderProps from "./two-renderprops";
 import UseReducer from "./use-reducer";
+import NeedUseReducer from "./need-use-reducer";
 
 const browserHistory = createBrowserHistory();
 
@@ -23,6 +24,7 @@ class App extends Component {
               <Route path="/one-renderprops" component={OneRenderProps} />
               <Route path="/two-hoc" component={TwoHoc} />
               <Route path="/two-renderprops" component={TwoRenderProps} />
+              <Route path="/need-use-reducer" component={NeedUseReducer} />
               <Route path="/use-reducer" component={UseReducer} />
             </div>
           </BrowserRouter>
