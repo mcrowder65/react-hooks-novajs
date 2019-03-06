@@ -12,16 +12,12 @@ function FilterNames({ list }) {
 
   const names = getNames();
 
-  const alertHello = () => {
-    alert("hello");
-  };
   return (
     <div>
       Names <input value={filter} onChange={(e) => setFilter(e.target.value)} />{" "}
       {names.map(({ name }) => (
         <span key={name}>{name}</span>
       ))}
-      <button onClick={alertHello}>alert hello!</button>
     </div>
   );
 }
@@ -30,6 +26,7 @@ FilterNames.propTypes = {
   list: PropTypes.array.isRequired,
 };
 function ParentComponent() {
+  const [mounted, setMounted] = React.useState(true);
   const list = Array(100)
     .fill()
     .map(() => {
@@ -40,7 +37,10 @@ function ParentComponent() {
     });
   return (
     <div>
-      <FilterNames list={list} />
+      <button onClick={() => setMounted((state) => !state)}>
+        Toggle mount
+      </button>
+      {mounted ? <FilterNames list={list} /> : null}
     </div>
   );
 }
