@@ -8,7 +8,10 @@ import OneRenderProps from "./one-renderprops";
 import LoadingProvider from "./loading";
 import TwoHoc from "./two-hoc";
 import TwoRenderProps from "./two-renderprops";
+import UseReducer from "./use-reducer";
+
 const browserHistory = createBrowserHistory();
+
 class App extends Component {
   render() {
     return (
@@ -20,6 +23,7 @@ class App extends Component {
               <Route path="/one-renderprops" component={OneRenderProps} />
               <Route path="/two-hoc" component={TwoHoc} />
               <Route path="/two-renderprops" component={TwoRenderProps} />
+              <Route path="/use-reducer" component={UseReducer} />
             </div>
           </BrowserRouter>
         </LoadingProvider>
