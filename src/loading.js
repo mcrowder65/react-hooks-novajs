@@ -15,43 +15,47 @@ function ReusableComponent({ children }) {
 
   return children({ makeApiCall, isLoading: loadCount > 0 });
 }
-class LoadingProvider extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
+
+export function useLoaders() {
+  const [loadCount, setLoadCount] = React.useState(0);
+  const makeApiCall = async (yourApiCall) => {
+    try {
+      setLoadCount((state) => state + 1);
+      await yourApiCall();
+    } finally {
+      setLoadCount((state) => state - 1);
+    }
   };
-  render() {
-    return (
-      <ReusableComponent>
-        {({ makeApiCall, isLoading }) => {
-          return (
-            <LoadingContext.Provider
-              value={{
-                makeApiCall,
-                isLoading,
-              }}
-            >
-              {this.props.children}
-            </LoadingContext.Provider>
-          );
-        }}
-      </ReusableComponent>
-    );
-  }
+
+  return { isLoading: loadCount > 0, makeApiCall };
+}
+
+function LoadingProvider({ children }) {
+  const { makeApiCall, isLoading } = useLoaders();
+  return (
+    <LoadingContext.Provider
+      value={{
+        makeApiCall,
+        isLoading,
+      }}
+    >
+      {children}
+    </LoadingContext.Provider>
+  );
 }
 LoadingProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+export function useGlobalLoader() {
+  return React.useContext(LoadingContext);
+}
+
 export default LoadingProvider;
 
 export const WithGlobalLoader = (props) => {
-  return (
-    <LoadingContext.Consumer>
-      {({ makeApiCall, isLoading }) => {
-        return props.children({ isLoading, makeApiCall });
-      }}
-    </LoadingContext.Consumer>
-  );
+  const { makeApiCall, isLoading } = React.useContext(LoadingContext);
+  return props.children({ isLoading, makeApiCall });
 };
 
 WithGlobalLoader.propTypes = {
@@ -76,13 +80,8 @@ export const withGlobalLoader = (YourComponent) => {
 };
 
 export const WithLocalLoader = (props) => {
-  return (
-    <ReusableComponent>
-      {({ makeApiCall, isLoading }) => {
-        return props.children({ makeApiCall, isLoading });
-      }}
-    </ReusableComponent>
-  );
+  const { makeApiCall, isLoading } = useLoaders();
+  return props.children({ makeApiCall, isLoading });
 };
 WithLocalLoader.propTypes = {
   children: PropTypes.func.isRequired,

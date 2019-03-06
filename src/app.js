@@ -8,6 +8,7 @@ import OneRenderProps from "./one-renderprops";
 import LoadingProvider from "./loading";
 import TwoHoc from "./two-hoc";
 import TwoRenderProps from "./two-renderprops";
+import TwoHooks from "./two-hooks";
 const browserHistory = createBrowserHistory();
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
               <Route path="/one-renderprops" component={OneRenderProps} />
               <Route path="/two-hoc" component={TwoHoc} />
               <Route path="/two-renderprops" component={TwoRenderProps} />
+              <Route path="/two-hooks" component={TwoHooks} />
             </div>
           </BrowserRouter>
         </LoadingProvider>
