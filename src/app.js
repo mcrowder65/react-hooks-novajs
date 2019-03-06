@@ -13,7 +13,8 @@ import UseReducer from "./use-reducer";
 import NeedUseReducer from "./need-use-reducer";
 import UseEffectClass from "./use-effect-class";
 import UseEffect from "./use-effect";
-
+import KeyListenerClass from "./key-listener-class";
+import KeyListenerHook from "./key-listener-hook";
 const browserHistory = createBrowserHistory();
 
 class App extends Component {
@@ -32,6 +33,8 @@ class App extends Component {
               <Route path="/use-reducer" component={UseReducer} />
               <Route path="/use-effect-class" component={UseEffectClass} />
               <Route path="/use-effect" component={UseEffect} />
+              <Route path="/key-listener-class" component={KeyListenerClass} />
+              <Route path="/key-listener-hook" component={KeyListenerHook} />
             </div>
           </BrowserRouter>
         </LoadingProvider>
