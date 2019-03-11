@@ -5,13 +5,13 @@ import { WithSnackbar } from "./snackbar";
 function OneRenderProps() {
   return (
     <WithSnackbar>
-      {({ addMessage }) => {
+      {(props) => {
         return (
           <Button
             variant="contained"
             color="primary"
             onClick={() => {
-              addMessage("I am a snackbar!");
+              props.addMessage("it worked!");
             }}
           >
             Add Snackbar

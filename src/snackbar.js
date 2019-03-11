@@ -102,3 +102,8 @@ export const withSnackbar = (YourComponent) => {
     );
   };
 };
+
+export const useSnackbar = () => {
+  const { addMessage } = React.useContext(SnackbarContext);
+  return { addMessage };
+};

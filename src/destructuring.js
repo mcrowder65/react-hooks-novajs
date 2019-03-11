@@ -3,8 +3,7 @@
 // const { hello, message } = object;
 //
 
-const array = ["hello", "pickles"];
+const array = ["hello", "matt"];
 
-const [hello, message] = array;
-
-console.log(hello, " ", message);
+const [a, message] = array;
+console.log(a, " ", message);
